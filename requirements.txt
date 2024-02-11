@@ -2,3 +2,4 @@ langchain
 openai
 PyPDF2
 streamlit
+tiktoken
