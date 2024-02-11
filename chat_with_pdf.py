@@ -24,6 +24,7 @@ with st.sidebar:
     
     st.write("This work is just one of many applications of Retrieval_Augmented Generation (RAG), You can read up on RAG here:")
     "[Retrieval_Augmented Generation](https://research.ibm.com/blog/retrieval-augmented-generation-RAG)"
+    
 
 # Stop if no API key is supplied
 if not openai_key:
@@ -45,7 +46,7 @@ def chunking(text):
     pdf_chunks = text_splitter.split_text(text)
 
     # Create an embeddings for the chunks
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(openai_api_key=openai_key)
 
     # Upsert chunks to FAISS vector database
     db_FAISS = FAISS.from_texts(pdf_chunks, embeddings)
