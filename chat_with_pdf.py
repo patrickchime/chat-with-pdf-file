@@ -19,7 +19,7 @@ st.write("📖 QA Bot: How can I help you?")
 # Add openai api key
 # Side bar
 with st.sidebar:
-    openai_key = st.sidebar.text_input("OpenAI API KEY", type="password")
+    openai_key = st.sidebar.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     "[Get an OpenAI API key](https://platform.openai.com/api-keys)"
     
     st.write("This work is just one of many applications of Retrieval_Augmented Generation (RAG), You can read up on RAG here:")
@@ -31,7 +31,7 @@ if not openai_key:
     st.warning("Enter your OpenAI key to continue")
     st.stop()
 
-
+openai.api_key = openai_key
 # Function to split file into chunks
 def chunking(text):
     # Instantiate text splitter
@@ -46,7 +46,7 @@ def chunking(text):
     pdf_chunks = text_splitter.split_text(text)
 
     # Create an embeddings for the chunks
-    embeddings = OpenAIEmbeddings(openai_api_key=openai_key)
+    embeddings = OpenAIEmbeddings(openai.api_key = openai_key)
 
     # Upsert chunks to FAISS vector database
     db_FAISS = FAISS.from_texts(pdf_chunks, embeddings)
