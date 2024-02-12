@@ -46,7 +46,7 @@ def chunking(text):
     pdf_chunks = text_splitter.split_text(text)
 
     # Create an embeddings for the chunks
-    embeddings = OpenAIEmbeddings(openai.api_key = openai_key)
+    embeddings = OpenAIEmbeddings(openai_api_key = openai_key)
 
     # Upsert chunks to FAISS vector database
     db_FAISS = FAISS.from_texts(pdf_chunks, embeddings)
